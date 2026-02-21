@@ -23,7 +23,9 @@
   <body class="w-10/12 mx-auto bg-gray-200">
     <h1 class="text-4xl py-5 font-bold">Job Application Tracker</h1>
     <!-- Count sections -->
-    <section class="grid grid-cols-3 gap-5">
+    <section
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 border-b-2 pb-4 border-gray-300"
+    >
       <div class="shadow p-4 rounded-lg">
         <h1>Total</h1>
         <h2 class="text-[22px] font-semibold">8</h2>
@@ -37,6 +39,23 @@
         <h2 class="text-[22px] font-semibold text-red-600">0</h2>
       </div>
     </section>
+    <!-- Toggle Buttons -->
+    <div>
+      <h1 class="font-bold text-2xl py-4">Available Jobs</h1>
+      <div class="space-x-2">
+        <button
+          class="px-6 py-2 border border-gray-300 rounded-lg bg-[#3B82F6] text-white"
+        >
+          All
+        </button>
+        <button class="px-6 py-2 border border-gray-300 rounded-lg">
+          Interview
+        </button>
+        <button class="px-6 py-2 border border-gray-300 rounded-lg">
+          Rejected
+        </button>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
