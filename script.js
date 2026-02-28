@@ -1,5 +1,7 @@
 let interviewCountLength = [];
 let rejectedCountLength = [];
+let currentStatus = "all";
+
 let totalCount = document.getElementById("total-count");
 let interviewCount = document.getElementById("interview-count");
 let rejectedCount = document.getElementById("rejected-count"); //Toggle buttons ids
@@ -21,19 +23,25 @@ function toggle(id) {
   interviewFilterBtn.classList.add("bg-white");
   rejectedFilterBtn.classList.add("bg-white");
   let selected = document.getElementById(id);
+  currentStatus = id;
   selected.classList.remove("bg-white");
   selected.classList.add("bg-[#3B82F6]", "text-white");
 
   if (id == "interview-filter-btn") {
     mainContainer.classList.add("hidden");
     filteredSection.classList.remove("hidden");
+    renderInterview();
   } else if (id == "all-filter-btn") {
     mainContainer.classList.remove("hidden");
     filteredSection.classList.add("hidden");
+  } else if (id == "rejected-filter-btn") {
+    mainContainer.classList.add("hidden");
+    filteredSection.classList.remove("hidden");
+    renderRejected();
   }
 }
 
-mainContainer.addEventListener("click", (event) => {
+document.addEventListener("click", (event) => {
   if (event.target.classList.contains("interview-btn")) {
     const parentNode = event.target.parentNode.parentNode;
     const jobName = parentNode.querySelector(".job-name").innerText;
@@ -60,8 +68,14 @@ mainContainer.addEventListener("click", (event) => {
     if (!jobExist) {
       interviewCountLength.push(jobInfo);
     }
+
+    rejectedCountLength = rejectedCountLength.filter(
+      (item) => item.jobName != jobInfo.jobName,
+    );
+    if (currentStatus == "rejected-filter-btn") {
+      renderRejected();
+    }
     calculateTotal();
-    renderInterview();
   } else if (event.target.classList.contains("rejected-btn")) {
     const parentNode = event.target.parentNode.parentNode;
     const jobName = parentNode.querySelector(".job-name").innerText;
@@ -88,8 +102,16 @@ mainContainer.addEventListener("click", (event) => {
     if (!jobExist) {
       rejectedCountLength.push(jobInfo);
     }
+    interviewCountLength = interviewCountLength.filter(
+      (item) => item.jobName != jobInfo.jobName,
+    );
+
+    if (currentStatus == "interview-filter-btn") {
+      renderInterview();
+    }
+
     calculateTotal();
-    renderRejected();
+    // renderRejected();
   }
 });
 
