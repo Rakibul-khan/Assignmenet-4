@@ -49,7 +49,7 @@ document.addEventListener("click", (event) => {
     const jobSalary = parentNode.querySelector(".job-salary").innerText;
     const notAppliedBtn = (parentNode.querySelector(
       ".not-applied-btn",
-    ).innerText = "Applied");
+    ).innerText = "INTERVIEW");
     const jobDescription =
       parentNode.querySelector(".job-description").innerText;
 
@@ -64,7 +64,7 @@ document.addEventListener("click", (event) => {
     const jobExist = interviewCountLength.find(
       (item) => item.jobName == jobInfo.jobName,
     );
-    jobInfo.notAppliedBtn.innerText = "Applied";
+    jobInfo.notAppliedBtn.innerText = "INTERVIEW";
     if (!jobExist) {
       interviewCountLength.push(jobInfo);
     }
@@ -83,7 +83,7 @@ document.addEventListener("click", (event) => {
     const jobSalary = parentNode.querySelector(".job-salary").innerText;
     const notAppliedBtn = (parentNode.querySelector(
       ".not-applied-btn",
-    ).innerText = "Rejected");
+    ).innerText = "REJECTED");
     const jobDescription =
       parentNode.querySelector(".job-description").innerText;
 
@@ -98,7 +98,7 @@ document.addEventListener("click", (event) => {
     const jobExist = rejectedCountLength.find(
       (item) => item.jobName == jobInfo.jobName,
     );
-    jobInfo.notAppliedBtn.innerText = "rejected";
+    jobInfo.notAppliedBtn.innerText = "REJECTED";
     if (!jobExist) {
       rejectedCountLength.push(jobInfo);
     }
@@ -117,21 +117,41 @@ document.addEventListener("click", (event) => {
 
 function renderInterview() {
   filteredSection.innerHTML = "";
+  if (interviewCountLength.length === 0) {
+    filteredSection.innerHTML = `
+      <div class="bg-white rounded-lg p-4 h-[400px] mt-5 flex justify-center items-center">
+      <div >
+      <img class="mx-auto" src="./assests/assignment_7959593 1.png">
+    <h1 class="text-center font-semibold text-2xl">No jobs Available</h1>
+    <p class="text-center">Check back soon for new job opportunities</p>
+      </div>
+      </div>
+      `;
+    return;
+  }
   for (let interview of interviewCountLength) {
     let div = document.createElement("div");
     div.innerHTML = ` <div class="bg-white p-6 space-y-4 mt-4 rounded-lg">
-        <h1 class="job-name text-xl font-semibold">${interview.jobName}</h1>
+        <div class="flex justify-between items-center">
+          <h1 class="job-name text-xl font-semibold">Mobile First Corp</h1>
+          <img
+            class="h-10 rounded-full cursor-pointer bg-gray-100 p-2"
+            src="./assests/Trash.png"
+            alt=""
+          />
+        </div>
         <p class="job-position text-gray-600 text-[18px]">
-         ${interview.jobPosition}
+          React Native Developer
         </p>
-        <p class="job-salary">${interview.jobSalary}</p>
+        <p class="job-salary">Remote • Full-time • $130,000 - $175,000</p>
         <button
           class="not-applied-btn bg-[#eef4ff] px-4 py-2 rounded-lg font-semibold"
         >
-         ${interview.notAppliedBtn}
+          NOT APPLIED
         </button>
         <p class="job-description">
-          ${interview.jobDescription}
+          Build cross-platform mobile applications using React Native. Work on
+          products used by millions of users worldwide.
         </p>
         <div class="flex gap-3">
           <button
@@ -151,21 +171,41 @@ function renderInterview() {
 }
 function renderRejected() {
   filteredSection.innerHTML = "";
+  if (rejectedCountLength.length === 0) {
+    filteredSection.innerHTML = `
+      <div class="bg-white rounded-lg p-4 h-[400px] mt-5 flex justify-center items-center">
+      <div >
+      <img class="mx-auto" src="./assests/assignment_7959593 1.png">
+    <h1 class="text-center font-semibold text-2xl">No jobs Available</h1>
+    <p class="text-center">Check back soon for new job opportunities</p>
+      </div>
+      </div>
+      `;
+    return;
+  }
   for (let rejected of rejectedCountLength) {
     let div = document.createElement("div");
-    div.innerHTML = ` <div class="bg-white p-6 space-y-4 mt-4 rounded-lg">
-        <h1 class="job-name text-xl font-semibold">${rejected.jobName}</h1>
+    div.innerHTML = `  <div class="bg-white p-6 space-y-4 mt-4 rounded-lg">
+        <div class="flex justify-between items-center">
+          <h1 class="job-name text-xl font-semibold">Mobile First Corp</h1>
+          <img
+            class="h-10 rounded-full cursor-pointer bg-gray-100 p-2"
+            src="./assests/Trash.png"
+            alt=""
+          />
+        </div>
         <p class="job-position text-gray-600 text-[18px]">
-         ${rejected.jobPosition}
+          React Native Developer
         </p>
-        <p class="job-salary">${rejected.jobSalary}</p>
+        <p class="job-salary">Remote • Full-time • $130,000 - $175,000</p>
         <button
           class="not-applied-btn bg-[#eef4ff] px-4 py-2 rounded-lg font-semibold"
         >
-         ${rejected.notAppliedBtn}
+          NOT APPLIED
         </button>
         <p class="job-description">
-          ${rejected.jobDescription}
+          Build cross-platform mobile applications using React Native. Work on
+          products used by millions of users worldwide.
         </p>
         <div class="flex gap-3">
           <button
@@ -177,7 +217,7 @@ function renderRejected() {
             class="rejected-btn border-2 border-red-400 px-3 py-2 font-semibold text-red-600 rounded-lg"
           >
             REJECTED
-          </button>
+          </button> 
         </div>
       </div>`;
     filteredSection.appendChild(div);
