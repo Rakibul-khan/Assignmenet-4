@@ -112,6 +112,30 @@ document.addEventListener("click", (event) => {
 
     calculateTotal();
     // renderRejected();
+  } else if (event.target.classList.contains("delete-btn")) {
+    const parentCard = event.target.closest(".bg-white");
+
+    const jobName = parentCard.querySelector(".job-name").innerText;
+
+    interviewCountLength = interviewCountLength.filter(
+      (item) => item.jobName !== jobName,
+    );
+
+    rejectedCountLength = rejectedCountLength.filter(
+      (item) => item.jobName !== jobName,
+    );
+
+    parentCard.remove();
+
+    if (currentStatus === "interview-filter-btn") {
+      renderInterview();
+    }
+
+    if (currentStatus === "rejected-filter-btn") {
+      renderRejected();
+    }
+
+    calculateTotal();
   }
 });
 
@@ -133,25 +157,24 @@ function renderInterview() {
     let div = document.createElement("div");
     div.innerHTML = ` <div class="bg-white p-6 space-y-4 mt-4 rounded-lg">
         <div class="flex justify-between items-center">
-          <h1 class="job-name text-xl font-semibold">Mobile First Corp</h1>
+          <h1 class="job-name text-xl font-semibold">${interview.jobName}</h1>
           <img
-            class="h-10 rounded-full cursor-pointer bg-gray-100 p-2"
+            class="delete-btn h-10 rounded-full cursor-pointer bg-gray-100 p-2"
             src="./assests/Trash.png"
             alt=""
           />
         </div>
         <p class="job-position text-gray-600 text-[18px]">
-          React Native Developer
+         ${interview.jobPosition}
         </p>
-        <p class="job-salary">Remote • Full-time • $130,000 - $175,000</p>
+        <p class="job-salary">${interview.jobSalary}</p>
         <button
           class="not-applied-btn bg-[#eef4ff] px-4 py-2 rounded-lg font-semibold"
         >
-          NOT APPLIED
+         ${interview.notAppliedBtn}
         </button>
         <p class="job-description">
-          Build cross-platform mobile applications using React Native. Work on
-          products used by millions of users worldwide.
+          ${interview.jobDescription}
         </p>
         <div class="flex gap-3">
           <button
@@ -187,25 +210,24 @@ function renderRejected() {
     let div = document.createElement("div");
     div.innerHTML = `  <div class="bg-white p-6 space-y-4 mt-4 rounded-lg">
         <div class="flex justify-between items-center">
-          <h1 class="job-name text-xl font-semibold">Mobile First Corp</h1>
+          <h1 class="job-name text-xl font-semibold">${rejected.jobName}</h1>
           <img
-            class="h-10 rounded-full cursor-pointer bg-gray-100 p-2"
+            class="delete-btn h-10 rounded-full cursor-pointer bg-gray-100 p-2"
             src="./assests/Trash.png"
             alt=""
           />
         </div>
         <p class="job-position text-gray-600 text-[18px]">
-          React Native Developer
+         ${rejected.jobPosition}
         </p>
-        <p class="job-salary">Remote • Full-time • $130,000 - $175,000</p>
+        <p class="job-salary">${rejected.jobSalary}</p>
         <button
           class="not-applied-btn bg-[#eef4ff] px-4 py-2 rounded-lg font-semibold"
         >
-          NOT APPLIED
+          ${rejected.notAppliedBtn}
         </button>
         <p class="job-description">
-          Build cross-platform mobile applications using React Native. Work on
-          products used by millions of users worldwide.
+        ${rejected.jobDescription}
         </p>
         <div class="flex gap-3">
           <button
